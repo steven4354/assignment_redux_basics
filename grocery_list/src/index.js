@@ -1,26 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import {createStore} from 'redux'
-import {groceryListReducer} from './reducers'
-import {addItem, purchaseItem} from './actions'
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
 
-let store = createStore(groceryListReducer);
+//redux
+import {createStore} from "redux";
+import {groceryListApp} from "./reducers";
+import {addItem, purchaseItem, setPurchaseFilter} from "./actions";
 
-let unsubscribe = store.subscribe(() =>{
+let store = createStore(groceryListApp);
+
+let unsubscribe = store.subscribe(() => {
   console.log(store.getState());
-})
+});
 
-store.dispatch(addItem(
-  {
-    name: 'Pringles',
-    description: 'Unhealthy',
+store.dispatch(
+  addItem({
+    name: "Pringles",
+    description: "Unhealthy"
   })
-)
+);
+
+store.dispatch(
+  addItem({
+    name: "strawberries",
+    description: "more fruits"
+  })
+);
 
 store.dispatch(purchaseItem(1));
 
-ReactDOM.render(<App />, document.getElementById('root'));
+store.dispatch(setPurchaseFilter("SHOW_PURCHASED"));
+
+ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();
