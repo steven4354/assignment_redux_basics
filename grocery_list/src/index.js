@@ -33,15 +33,14 @@ store.dispatch(purchaseItem(1));
 
 store.dispatch(setPurchaseFilter("SHOW_PURCHASED"));
 
-store.dispatch(sort({category:"name", order:"ASC"}));
+store.dispatch(sort({category: "name", order: "ASC"}));
 
-store.dispatch(sort({category:"name", order:"DESC"}));
+store.dispatch(sort({category: "name", order: "DESC"}));
 
+store.dispatch(sort({category: "description", order: "ASC"}));
+store.dispatch(sort({category: "description", order: "DESC"}));
 
-store.dispatch(sort({category:"description", order:"ASC"}));
-store.dispatch(sort({category:"description", order:"DESC"}));
-
-
+// console.log(store.getState().groceryListReducer.filter(obj => {}));
 
 ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();
