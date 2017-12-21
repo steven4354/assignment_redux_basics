@@ -7,7 +7,7 @@ import registerServiceWorker from "./registerServiceWorker";
 //redux
 import {createStore} from "redux";
 import {groceryListApp} from "./reducers";
-import {addItem, purchaseItem, setPurchaseFilter} from "./actions";
+import {addItem, purchaseItem, setPurchaseFilter, sort} from "./actions";
 
 let store = createStore(groceryListApp);
 
@@ -32,6 +32,16 @@ store.dispatch(
 store.dispatch(purchaseItem(1));
 
 store.dispatch(setPurchaseFilter("SHOW_PURCHASED"));
+
+store.dispatch(sort({category:"name", order:"ASC"}));
+
+store.dispatch(sort({category:"name", order:"DESC"}));
+
+
+store.dispatch(sort({category:"description", order:"ASC"}));
+store.dispatch(sort({category:"description", order:"DESC"}));
+
+
 
 ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();

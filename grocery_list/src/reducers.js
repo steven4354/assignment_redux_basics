@@ -1,8 +1,6 @@
 import {combineReducers} from "redux";
 
-import {ADD_ITEM} from "./actions";
-import {PURCHASE_ITEM} from "./actions";
-import {SET_PURCHASED_FILTER} from "./actions";
+import {ADD_ITEM, PURCHASE_ITEM, SET_PURCHASED_FILTER, SET_SORT} from "./actions";
 
 const initialState = {
   items: [
@@ -46,6 +44,31 @@ export function groceryListReducer(state = initialState, action) {
           return item;
         })
       };
+
+    case SET_SORT:
+      //sort by name or description asc/desc
+      //{category: name/description, order:asc/desc}
+      let sort = action.data;
+      return {
+        ...state,
+        items: state.items.sort((a,b)=>{
+          let order;
+          if (sort.order==="ASC"){
+            order=1;
+          }
+          else if (sort.order==="DESC"){
+            order=-1
+          }
+          else {
+            order=0
+          }
+          if (a[sort.category].toUpperCase() > b[sort.category].toUpperCase()){
+
+            return order
+          }
+          return order * -1
+        })
+      };
     default:
       return state;
   }
@@ -59,6 +82,7 @@ export function groceryListFilterReducer(state = "SHOW_ALL", action) {
       return state;
   }
 }
+
 
 export const groceryListApp = combineReducers({
   groceryListReducer,
