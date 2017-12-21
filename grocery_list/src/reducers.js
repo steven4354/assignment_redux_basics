@@ -49,19 +49,21 @@ export function groceryListReducer(state = initialState, action) {
       //sort by name or description asc/desc
       //{category: name/description, order:asc/desc}
       let sort = action.data;
+      let order;
+      if (sort.order==="ASC"){
+        order=1;
+       }
+      else if (sort.order==="DESC"){
+        order=-1
+      }
+      else {
+        order=0
+      }
+      
       return {
         ...state,
         items: state.items.slice(0).sort((a,b)=>{
-          let order;
-          if (sort.order==="ASC"){
-            order=1;
-          }
-          else if (sort.order==="DESC"){
-            order=-1
-          }
-          else {
-            order=0
-          }
+          
           if (a[sort.category].toUpperCase() > b[sort.category].toUpperCase()){
 
             return order
