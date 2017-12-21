@@ -51,7 +51,7 @@ export function groceryListReducer(state = initialState, action) {
       let sort = action.data;
       return {
         ...state,
-        items: state.items.sort((a,b)=>{
+        items: state.items.slice(0).sort((a,b)=>{
           let order;
           if (sort.order==="ASC"){
             order=1;
